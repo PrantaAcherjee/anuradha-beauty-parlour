@@ -1,17 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useLocation, useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./Register.css"
 import { useState } from 'react';
-import UseFirebase from './../../../../Hooks/UseFirebase';
+import UseAuth from '../../../../Hooks/UseAuth';
 
 const Register = () => {
 const [registerData,setRegisterData]=useState({});
-const {registerWithEmailPassword,googleSignIn}=UseFirebase();
+const {registerWithEmailPassword,googleSignIn}=UseAuth();
+const location= useLocation();
+const history=useHistory();
+
 
 const handleGoogleSignIn=()=>{
-    googleSignIn();
+    googleSignIn(location,history);
 }
 
 const handleOnChange=(e)=>{
@@ -26,7 +29,7 @@ const handleOnRegister=e=>{
         alert('Your password did not match');
         return;
     }
-    registerWithEmailPassword(registerData.email,registerData.password,registerData.name);
+    registerWithEmailPassword(registerData.email,registerData.password,registerData.name,history);
     e.target.reset();
     e.preventDefault();
 }
