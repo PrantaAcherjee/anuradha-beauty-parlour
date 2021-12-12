@@ -15,6 +15,7 @@ const Feature = () => {
         <Typography variant="h4" sx={{textAlign:"justify"}}>Let Us Handle Your
          <br /> Screen Professionally
          </Typography>
+         <br />
          <Typography sx={{textAlign:"justify",fontSize:"15px",color:"gray",paddingRight:"20px"}}>
              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla deleniti sequi quidem, totam eveniet natus doloremque ipsa, itaque eum harum excepturi iure pariatur, numquam praesentium doloribus ipsam sunt iste similique aspernatur! Inventore repudiandae quae neque? Ipsum quisquam quibusdam veritatis temporibus eius sunt.
          </Typography>

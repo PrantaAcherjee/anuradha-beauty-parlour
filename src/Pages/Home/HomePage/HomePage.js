@@ -10,7 +10,7 @@ import Testomonial from '../Testomonial/Testomonial';
 const HomePage = () => {
     return (
         <div>
-           <Navbar></Navbar>
+            <Navbar></Navbar>
             <Banner></Banner>
             <Services></Services>
             <Feature></Feature>
