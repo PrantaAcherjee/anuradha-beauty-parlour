@@ -4,6 +4,7 @@ import AuthProvider from './Context/AuthProvider/AuthProvider';
 import Dashboard from './Pages/Home/Dashboard/Dashboard';
 import HomePage from './Pages/Home/HomePage/HomePage';
 import Login from './Pages/Home/Login/Login/Login';
+import PrivateRoute from './Pages/Home/Login/PrivateRoute/PrivateRoute';
 import Register from './Pages/Home/Login/Register/Register';
 import Services from './Pages/Home/Services/Services';
  
@@ -29,9 +30,9 @@ function App() {
         <Route path="/services">
          <Services></Services>  
         </Route>
-        <Route path="/dashboard">
+        <PrivateRoute path="/dashboard">
            <Dashboard></Dashboard>
-        </Route>
+        </PrivateRoute>
       </Switch>
       </BrowserRouter>
      </AuthProvider>
