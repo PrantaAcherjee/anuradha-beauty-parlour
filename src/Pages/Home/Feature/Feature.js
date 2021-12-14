@@ -9,7 +9,7 @@ const Feature = () => {
         <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2} style={{paddingTop:"30px"}} columns={12}>
         <Grid item xs={12} md={6}>
-           <img src={treatment} alt="" style={{height:"50vh",width:"55vh"}} />
+           <img src={treatment} alt="" style={{height:"50vh",width:"55vh",marginTop:"5px"}} />
         </Grid>
         <Grid item xs={12} md={6}>
         <Typography variant="h4" sx={{textAlign:"justify"}}>Let Us Handle Your

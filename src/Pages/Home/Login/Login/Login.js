@@ -2,14 +2,15 @@ import Button from '@mui/material/Button';
 import React, { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import UseAuth from '../../../../Hooks/UseAuth';
+ import UseAuth from '../../../../Hooks/UseAuth';
+import { CircularProgress } from '@mui/material';
  
 const Login = () => {
 const [logInData,setLogInData]=useState({});
 const location= useLocation();
 const history=useHistory();
 
-const {googleSignIn,loginUser}=UseAuth();
+const {googleSignIn,loginUser,isLoading}=UseAuth();
 
 const handleGoogleSignIn=()=>{
  googleSignIn(location,history);
@@ -31,14 +32,16 @@ const handleOnChange=(e)=>{
     return (
         <div>
              <h2>Please Login Here</h2>
-            <form onClick={handleLogIn}>
+            {!isLoading &&
+                <form onSubmit={handleLogIn}>
               <TextField
                             sx={{ width: '30%', m: 1 }}
                             id="standard-basic"
                             label="Your Email"
                             name="email"
                             onChange={handleOnChange}
-                            variant="standard" />
+                            variant="standard" 
+                            required/>
                             <br />
               <TextField
                              sx={{ width: '30%', m: 1 }}
@@ -47,11 +50,14 @@ const handleOnChange=(e)=>{
                             type="password"
                             name="password"
                             onChange={handleOnChange}
-                            variant="standard" />
+                            variant="standard" 
+                            required/>
                             <br />
                             <Button type='submit' variant='contained'>Submit</Button>
             </form>
              
+            }
+            {isLoading && <CircularProgress />}
             <br />
             <p> -----------OR-------------- </p>
             <Button onClick={handleGoogleSignIn} variant='contained'>Continue with google</Button>

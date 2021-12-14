@@ -3,6 +3,7 @@ import './App.css';
 import AuthProvider from './Context/AuthProvider/AuthProvider';
 import Dashboard from './Pages/Home/Dashboard/Dashboard';
 import HomePage from './Pages/Home/HomePage/HomePage';
+import Order from './Pages/Home/Login/GetOrder/Order';
 import Login from './Pages/Home/Login/Login/Login';
 import PrivateRoute from './Pages/Home/Login/PrivateRoute/PrivateRoute';
 import Register from './Pages/Home/Login/Register/Register';
@@ -30,6 +31,9 @@ function App() {
         <Route path="/services">
          <Services></Services>  
         </Route>
+        <PrivateRoute path="/order">
+          <Order></Order>
+        </PrivateRoute>
         <PrivateRoute path="/dashboard">
            <Dashboard></Dashboard>
         </PrivateRoute>

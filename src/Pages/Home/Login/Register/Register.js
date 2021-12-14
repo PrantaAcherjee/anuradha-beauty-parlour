@@ -2,13 +2,13 @@ import React from 'react';
 import { Link,useLocation, useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import "./Register.css"
+ 
 import { useState } from 'react';
 import UseAuth from '../../../../Hooks/UseAuth';
-
+import { CircularProgress } from '@mui/material';
 const Register = () => {
 const [registerData,setRegisterData]=useState({});
-const {registerWithEmailPassword,googleSignIn}=UseAuth();
+const {registerWithEmailPassword,googleSignIn,isLoading}=UseAuth();
 const location= useLocation();
 const history=useHistory();
 
@@ -38,43 +38,46 @@ const handleOnRegister=e=>{
         <div>
             <br /> 
             <h2>Create an account</h2>
-            <form onSubmit={handleOnRegister}>
-            <TextField style={{width:"25%"}} id="standard-basic" label="Name" variant="standard"
-            type="text"
-            name='name'
-            onChange={handleOnChange}
-            required />
-            <br />
-            <TextField style={{width:"25%"}}
-            id="standard-basic" label="Email" variant="standard"
-            type="Email"
-            name='email'
-            onChange={handleOnChange}
-            required />
-            <br />
-            <TextField style={{width:"25%"}}
-            id="filled-password-input"
-            label="Password"
-            type="password"
-            name='password'
-            onChange={handleOnChange}
-            variant="standard"
-            required
-            />
-            <br />
-            <TextField style={{width:"25%"}}
-            id="filled-password-input"
-            label="Confirm Password"
-            type="password"
-            name='password2'
-            onChange={handleOnChange}
-            variant="standard"
-            required
-            />
-            <br />
-            <br />
-            <Button variant='contained' type="submit">Create an account</Button>
-            </form>
+            {!isLoading &&
+                <form onSubmit={handleOnRegister}>
+                <TextField style={{width:"25%"}} id="standard-basic" label="Name" variant="standard"
+                type="text"
+                name='name'
+                onChange={handleOnChange}
+                required />
+                <br />
+                <TextField style={{width:"25%"}}
+                id="standard-basic" label="Email" variant="standard"
+                type="Email"
+                name='email'
+                onChange={handleOnChange}
+                required />
+                <br />
+                <TextField style={{width:"25%"}}
+                id="filled-password-input"
+                label="Password"
+                type="password"
+                name='password'
+                onChange={handleOnChange}
+                variant="standard"
+                required
+                />
+                <br />
+                <TextField style={{width:"25%"}}
+                id="filled-password-input"
+                label="Confirm Password"
+                type="password"
+                name='password2'
+                onChange={handleOnChange}
+                variant="standard"
+                required
+                />
+                <br />
+                <br />
+                <Button variant='contained' type="submit">Create an account</Button>
+                </form>
+            }
+            {isLoading && <CircularProgress />}
             <br />
             <Link style={{textDecoration:"none"}} to="/login">
             Already have an account? Login

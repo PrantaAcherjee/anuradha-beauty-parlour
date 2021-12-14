@@ -27,19 +27,20 @@ const googleSignIn=(location,history)=>{
 // register with email and password 
 const registerWithEmailPassword=(email,password,name,history)=>{
   setIsLoading(true);
-  createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    setError('')   
-    const user = userCredential.user;
-      
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+    const newUser={email};
+    setUser(newUser);
+      setError('')
+      history.replace('/');
   })
-    .catch((error) => {
-      setError(error.message);           
-  });
-  history.replace('/')
-  .finally(()=>setIsLoading(false));  
-}
+      .catch((error) => {
+        setError(error.message)
+      
+      })
+      .finally(() => setIsLoading(false));
 
+}
 // Sign out
 const logOut=()=>{
    setIsLoading(true);
@@ -49,9 +50,7 @@ const logOut=()=>{
       }).catch((error) => {
         setError(error.message);           
       })
-      .finally(()=>{
-        setIsLoading(false);
-      })   
+      .finally(() => setIsLoading(false));
 }
 
 // sign in with email password 
@@ -67,7 +66,7 @@ const loginUser=(email,password,location,history)=>{
    .catch((error) => {
     setError(error.message);                           
  })
- .finally(()=>setIsLoading(false));   
+ .finally(() => setIsLoading(false));
 }
 
 // observer
@@ -80,7 +79,7 @@ const unsubscribed=onAuthStateChanged(auth, (user) => {
    setUser({})
   }
     setIsLoading(false);
-  })
+  });
    
   return ()=>unsubscribed;
 
