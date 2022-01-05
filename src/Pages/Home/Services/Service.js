@@ -8,7 +8,7 @@ import  Button  from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const Service = (props) => {
-    const{name,description,img,price}=props.service 
+    const{name,description,img,price,id}=props.service 
     return (
          
 <Grid item xs={4} sm={4} md={4}>
@@ -30,7 +30,7 @@ const Service = (props) => {
            {description}
         </Typography>
         <br />
-        <Link style={{textDecoration:'none'}} to="/order">
+        <Link style={{textDecoration:'none'}} to={`/order/${id}`}>
         <Button variant='contained'>Order Now</Button>
         </Link>
       </CardContent>

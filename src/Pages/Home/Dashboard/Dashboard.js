@@ -4,33 +4,42 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+import IconButton from '@mui/material/IconButton'; 
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-const drawerWidth = 200;
+import {
+  Switch,
+  Route,
+  useRouteMatch
+} from "react-router-dom";
+import DashboardHome from './DashboardHome/DashboardHome';
+import MakeAdmin from './MakeAdmin/MakeAdmin';
+import GiveReviews from './GiveReviews/GiveReviews';
 
+const drawerWidth = 200;
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  let {path,url}=useRouteMatch();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+    
   };
 
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
+
+      <Link style={{textDecoration:'none',color:'grey'}}  to={`${url}`}>Dashboard</Link>
+      <br />
+      <Link style={{textDecoration:'none',color:'grey'}}  to={`${url}/makeAdmin`}>Make Admin</Link>
+      <br />
       <Link style={{textDecoration:'none',color:'grey'}} to="/services">
             <Button color="inherit">Get Service</Button>
           </Link>
@@ -38,33 +47,20 @@ function Dashboard(props) {
       <Link style={{textDecoration:'none',color:'grey'}} to="/">
             <Button color="inherit">Add Service</Button>
           </Link>
-      <Link style={{textDecoration:'none',color:'grey'}} to="/">
-            <Button color="inherit">Make Admin</Button>
-          </Link>
+       
       <Link style={{textDecoration:'none',color:'grey'}} to="/">
             <Button color="inherit">Booking List</Button>
           </Link>
           <br />
-      <Link style={{textDecoration:'none',color:'grey'}} to="/">
-            <Button color="inherit">Review</Button>
-          </Link>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-       
+          <Link style={{textDecoration:'none',color:'grey'}} to={`${url}/review`}>
+           Review 
+          </Link> 
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+   const container = window !== undefined ? () => window().document.body : undefined;
 
-  return (
+  return(
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
@@ -85,7 +81,7 @@ function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-             We Care Your Screen
+           Our Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -94,7 +90,7 @@ function Dashboard(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
@@ -126,8 +122,18 @@ function Dashboard(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-         
-         
+        <Switch>
+        <Route exact path={path}>
+          <DashboardHome></DashboardHome>
+        </Route>
+        <Route path={`${path}/makeAdmin`}>
+          <MakeAdmin></MakeAdmin> 
+        </Route>
+         <Route path={`${path}/review`}>
+          <GiveReviews></GiveReviews> 
+         </Route>
+      </Switch>
+           
       </Box>
     </Box>
   );

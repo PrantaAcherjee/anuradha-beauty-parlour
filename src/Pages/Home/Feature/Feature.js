@@ -8,11 +8,11 @@ const Feature = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2} style={{paddingTop:"30px"}} columns={12}>
-        <Grid item xs={12} md={6}>
-           <img src={treatment} alt="" style={{height:"50vh",width:"55vh",marginTop:"5px"}} />
+        <Grid item xs={12} md={7}>
+           <img src={treatment} alt="" style={{height:"50vh",width:"65vh",marginTop:"5px"}} />
         </Grid>
-        <Grid item xs={12} md={6}>
-        <Typography variant="h4" sx={{textAlign:"justify"}}>Let Us Handle Your
+        <Grid item xs={12} md={5}>
+        <Typography variant="h4" sx={{textAlign:"justify",fontWeight:400}}>Let Us Handle Your
          <br /> Screen Professionally
          </Typography>
          <br />

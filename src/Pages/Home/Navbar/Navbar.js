@@ -6,14 +6,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
 import UseFirebase from '../../../Hooks/UseFirebase';
- 
+import headerIcon from '../../../Icon/headicon.png';
+
 const Navbar = () => {
  const{user,logOut}= UseFirebase();  
    return (
     <Box style={{marginBottom:"50px"}} xs={12} sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Toolbar>
-         <Typography variant="h6">Anuradha Beautician</Typography>
+          <img style={{width:'15%'}} src={headerIcon} alt="" />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           
         </Typography>
