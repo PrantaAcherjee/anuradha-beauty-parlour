@@ -1,39 +1,38 @@
 import React from 'react';
 import './GiveReviews.css';
-import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import { useForm } from "react-hook-form";
 
 const GiveReviews = () => {
-    const handleAddReview=(e)=>{
-
-        
-    e.preventDefault();
-    }
+  const { register, handleSubmit,reset } = useForm();
+  const onSubmit = data =>{
+  axios.post('http://localhost:5000/reviews',data)
+      .then(res=>{
+          if(res.data.insertedId){
+              alert('Thanks for your feadback')
+              reset();
+          }
+      })
+  
+  console.log(data);
+  }
     return (
         <div className='review-section'>
           <h2>Drop Your Review Below</h2>
-        <form onSubmit={handleAddReview}>
-          <TextField
-           
-           style={{width:'40%'}}
-          label="Name" variant="standard" />
-          <br />
-          <TextField
-           
-           style={{width:'40%'}} 
-          label="Rating up to 5"
-          type="number"          
-          variant="standard"
-          />
-          <br />
-          <br />
-          <TextField
-          
-           style={{width:'40%'}}
-          label="Comments"
-          multiline
-          variant="standard"
-         />        
-    </form>  
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input style={{width:'40%',height:'35px'}} {...register("name")}
+            placeholder='Name' />
+    
+              <br />
+            <input style={{width:'40%',height:'35px'}} type="number"
+            placeholder='Ratings up to 5'
+            {...register("ratings")} />
+                  <br />
+            <input style={{width:'40%',height:'70px'}} {...register("description", { required: true})}
+            placeholder='Send Your Feadback' />
+                <br />
+            <input type="submit" />             
+    </form>
     </div>
     );
 };

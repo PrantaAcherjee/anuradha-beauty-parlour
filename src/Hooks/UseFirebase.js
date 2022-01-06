@@ -84,9 +84,11 @@ const unsubscribed=onAuthStateChanged(auth, (user) => {
   return ()=>unsubscribed;
 
 },[])
-   
+
+ 
 
 return{
+   
   error,
   user,
   isLoading,

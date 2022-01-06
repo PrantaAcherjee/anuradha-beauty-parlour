@@ -1,10 +1,10 @@
 import React from 'react';
+import './DashboardHome.css';
 
 const DashboardHome = () => {
     return (
-        <div>
-          <h2>This is dashboard home</h2>  
-           
+        <div className='background'>
+          
          </div>
     );
 };

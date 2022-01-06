@@ -7,10 +7,9 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton'; 
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
-
+ import { Link } from 'react-router-dom';
+ import dashIcon from '../../../Icon/headicon.png';
+ 
 import {
   Switch,
   Route,
@@ -19,6 +18,10 @@ import {
 import DashboardHome from './DashboardHome/DashboardHome';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
 import GiveReviews from './GiveReviews/GiveReviews';
+import BookingList from './BookingList/BookingList';
+import AddProducts from './AddProducts/AddProducts';
+ 
+ 
 
 const drawerWidth = 200;
 function Dashboard(props) {
@@ -34,27 +37,20 @@ function Dashboard(props) {
   const drawer = (
     <div>
       <Toolbar />
+      
       <Divider />
 
-      <Link style={{textDecoration:'none',color:'grey'}}  to={`${url}`}>Dashboard</Link>
+    <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}`}>Dashboard</Link>
       <br />
-      <Link style={{textDecoration:'none',color:'grey'}}  to={`${url}/makeAdmin`}>Make Admin</Link>
-      <br />
-      <Link style={{textDecoration:'none',color:'grey'}} to="/services">
-            <Button color="inherit">Get Service</Button>
-          </Link>
-          <br />
-      <Link style={{textDecoration:'none',color:'grey'}} to="/">
-            <Button color="inherit">Add Service</Button>
-          </Link>
        
-      <Link style={{textDecoration:'none',color:'grey'}} to="/">
-            <Button color="inherit">Booking List</Button>
-          </Link>
-          <br />
-          <Link style={{textDecoration:'none',color:'grey'}} to={`${url}/review`}>
-           Review 
-          </Link> 
+   <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}/makeAdmin`}>Make Admin</Link>
+     <br /> 
+   <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}/addServices`}>Add Services</Link>
+     <br /> 
+    <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}} to={`${url}/review`}> Review </Link> 
+    <br />
+    <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}} to={`${url}/bookinglist`}> Booking List </Link> 
+         
     </div>
   );
 
@@ -80,9 +76,8 @@ function Dashboard(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-           Our Dashboard
-          </Typography>
+          <img style={{width:'10%'}} src={dashIcon} alt="" />
+           
         </Toolbar>
       </AppBar>
       <Box
@@ -131,6 +126,12 @@ function Dashboard(props) {
         </Route>
          <Route path={`${path}/review`}>
           <GiveReviews></GiveReviews> 
+         </Route>
+         <Route path={`${path}/bookinglist`}>
+           <BookingList></BookingList>
+         </Route>
+         <Route path={`${path}/addservices`}>
+            <AddProducts></AddProducts>
          </Route>
       </Switch>
            
