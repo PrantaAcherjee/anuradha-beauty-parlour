@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 const Testomonial = () => {
     const [testimonial,setTestimonial]=useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/reviews')
+        fetch('https://morning-reef-69283.herokuapp.com/reviews')
         .then(res=>res.json())
         .then(data=>setTestimonial(data));
     },[])
