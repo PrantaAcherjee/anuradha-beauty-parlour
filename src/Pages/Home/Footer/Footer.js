@@ -40,7 +40,10 @@ const Footer = () => {
          
         
         </Grid>
+        
       </Grid>
+ 
+      <Typography style={{color:'lightgray',marginTop:'75px'}}>&copy; COPYRIGHT ALL RIGHT RESERVED ANURADHA</Typography>
     </Box>
     );
 };

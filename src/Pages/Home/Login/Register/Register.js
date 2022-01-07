@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
  
 import { useState } from 'react';
 import UseAuth from '../../../../Hooks/UseAuth';
-import { CircularProgress } from '@mui/material';
+import {CircularProgress, Typography } from '@mui/material';
 const Register = () => {
 const [registerData,setRegisterData]=useState({});
-const {registerWithEmailPassword,googleSignIn,isLoading}=UseAuth();
+const {registerWithEmailPassword,googleSignIn,isLoading,}=UseAuth();
 const location= useLocation();
 const history=useHistory();
 
@@ -37,8 +37,10 @@ const handleOnRegister=e=>{
     return (
         <div>
             <br /> 
-            <h2>Create an account</h2>
-            {!isLoading &&
+            {
+            isLoading && <CircularProgress />
+            }
+            <Typography variant='h4'>Create an account</Typography>
                 <form onSubmit={handleOnRegister}>
                 <TextField style={{width:"25%"}} id="standard-basic" label="Name" variant="standard"
                 type="text"
@@ -76,8 +78,7 @@ const handleOnRegister=e=>{
                 <br />
                 <Button variant='contained' type="submit">Create an account</Button>
                 </form>
-            }
-            {isLoading && <CircularProgress />}
+           
             <br />
             <Link style={{textDecoration:"none"}} to="/login">
             Already have an account? Login

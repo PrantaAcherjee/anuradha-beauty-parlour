@@ -1,4 +1,4 @@
-import { GoogleAuthProvider,getAuth, signInWithPopup,createUserWithEmailAndPassword,signOut ,onAuthStateChanged,signInWithEmailAndPassword} from "firebase/auth";
+import { GoogleAuthProvider,getAuth, signInWithPopup,createUserWithEmailAndPassword,signOut ,onAuthStateChanged,signInWithEmailAndPassword,updateProfile} from "firebase/auth";
 import { useState,useEffect } from "react";
 import firebaseInitialize from './../Pages/Home/Login/Firebase/Firebse.init';
 firebaseInitialize();
@@ -6,6 +6,7 @@ const UseFirebase=()=>{
 const [user,setUser]=useState({});
 const [isLoading,setIsLoading]=useState(true);
 const [error,setError]=useState('');
+const [admin,setAdmin]=useState(false);
 const auth = getAuth();
 
 const googleProvider = new GoogleAuthProvider();
@@ -18,7 +19,9 @@ const googleSignIn=(location,history)=>{
     history.replace(destination);
     setError(''); 
     const user = result.user;
-  }).catch((error) => {
+    saveUser(user.email,user.displayName,'PUT')
+  })
+  .catch((error) => {
     setError(error.message);
   })
   .finally(()=>setIsLoading(false));
@@ -29,11 +32,18 @@ const registerWithEmailPassword=(email,password,name,history)=>{
   setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-    const newUser={email};
-    setUser(newUser);
+      const newUser={email,displayName:name};
+      setUser(newUser);
+      saveUser(email,name,'POST')
       setError('')
       history.replace('/');
   })
+  //send name to firebase after creation
+      updateProfile(auth.currentUser, {
+       displayName: name
+     })
+     .then(() => {    
+      })
       .catch((error) => {
         setError(error.message)
       
@@ -85,7 +95,25 @@ const unsubscribed=onAuthStateChanged(auth, (user) => {
 
 },[])
 
- 
+// save user to database 
+const saveUser=(email,displayName,method)=>{
+  const user={email,displayName};
+  fetch('https://morning-reef-69283.herokuapp.com/users',{
+    method:method,
+    headers:{
+        'content-type':'application/json'
+    },
+    body:JSON.stringify(user)
+  })
+  .then()
+}
+
+// admin route secure by admin
+useEffect(()=>{
+  fetch(`https://morning-reef-69283.herokuapp.com/users/${user.email}`)
+  .then(res=>res.json())
+  .then(data=>setAdmin(data.admin))
+},[user.email])
 
 return{
    
@@ -96,7 +124,8 @@ return{
   googleSignIn,
   registerWithEmailPassword,
   loginUser,
-
+  saveUser,
+  admin
 }
 
 };

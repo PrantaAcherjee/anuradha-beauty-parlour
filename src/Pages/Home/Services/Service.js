@@ -23,8 +23,8 @@ const Service = (props) => {
         <Typography variant="h5" component="div">
           {name}
         </Typography>
-        <Typography   component="div">
-          {price}
+        <Typography component="div">
+          ${price}
         </Typography>
          <Typography variant="body2" color="text.secondary">
            {description}

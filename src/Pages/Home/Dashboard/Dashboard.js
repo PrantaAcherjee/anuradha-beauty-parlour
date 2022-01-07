@@ -20,11 +20,14 @@ import MakeAdmin from './MakeAdmin/MakeAdmin';
 import GiveReviews from './GiveReviews/GiveReviews';
 import BookingList from './BookingList/BookingList';
 import AddProducts from './AddProducts/AddProducts';
+import UseAuth from './../../../Hooks/UseAuth';
+import AdminRoute from './../AdminRoute/AdminRoute';
  
  
 
 const drawerWidth = 200;
 function Dashboard(props) {
+  const {admin}= UseAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   let {path,url}=useRouteMatch();
@@ -43,14 +46,18 @@ function Dashboard(props) {
     <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}`}>Dashboard</Link>
       <br />
        
-   <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}/makeAdmin`}>Make Admin</Link>
-     <br /> 
-   <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}/addServices`}>Add Services</Link>
-     <br /> 
     <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}} to={`${url}/review`}> Review </Link> 
     <br />
     <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}} to={`${url}/bookinglist`}> Booking List </Link> 
-         
+
+    {
+      admin && <Box>
+        <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}/makeAdmin`}>Make Admin</Link>
+       <br /> 
+        <Link style={{textDecoration:'none',color:'grey',fontWeight:'bold'}}  to={`${url}/addServices`}>Add Services</Link>
+
+      </Box>
+    }  
     </div>
   );
 
@@ -121,18 +128,18 @@ function Dashboard(props) {
         <Route exact path={path}>
           <DashboardHome></DashboardHome>
         </Route>
-        <Route path={`${path}/makeAdmin`}>
+        <AdminRoute path={`${path}/makeAdmin`}>
           <MakeAdmin></MakeAdmin> 
-        </Route>
+        </AdminRoute>
          <Route path={`${path}/review`}>
           <GiveReviews></GiveReviews> 
          </Route>
          <Route path={`${path}/bookinglist`}>
            <BookingList></BookingList>
          </Route>
-         <Route path={`${path}/addservices`}>
+         <AdminRoute path={`${path}/addservices`}>
             <AddProducts></AddProducts>
-         </Route>
+         </AdminRoute>
       </Switch>
            
       </Box>
